@@ -4,7 +4,7 @@ const Forminput = ({text,value,handlechange,...otherProps}) => {
   return (
     <React.Fragment>
     <Form>
-  <Form.Group controlId="formGroupEmail">
+  <Form.Group>
     <Form.Label>{text}</Form.Label>
     <Form.Control value={value} onChange={handlechange} {...otherProps} />
   </Form.Group>

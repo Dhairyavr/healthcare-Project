@@ -1,17 +1,16 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Modal} from 'react-bootstrap';
-const Document = ({url,title}) => {
-  const [lgShow, setLgShow] = useState(true);
+
+import {connect} from 'react-redux';
+import {setviewpopup} from '../redux/user/user-actions';
+
+
+const Document = ({url,title,setviewpopup,viewimg}) => {
+
   return (
     <React.Fragment>
-      <Modal
-      centered="true"
-       size="lg"
-       show={lgShow}
-       onHide={() => setLgShow(false)}
-       aria-labelledby="example-modal-sizes-title-lg"
-       style={{height:"50rem" ,width:"50rem",display:"flex",margin:"auto",}}
-     >
+      <Modal size="lg" show={viewimg} onHide={setviewpopup} aria-labelledby="example-modal-sizes-title-lg"
+       style={{height:"50rem" ,width:"50rem",display:"flex",margin:"auto",}} >
        <Modal.Header closeButton>
          <Modal.Title id="example-modal-sizes-title-lg">
            {title}
@@ -23,7 +22,7 @@ const Document = ({url,title}) => {
   marginRight: "20px",
   width:"90%"}}/>
        </Modal.Body>
-       
+
      </Modal>
 
 
@@ -33,4 +32,12 @@ const Document = ({url,title}) => {
   );
 }
 
-export default Document;
+const mapDispatchToProps = dispatch => ({
+  setviewpopup:()=>dispatch(setviewpopup())
+})
+
+const mapStateToProps = state => ({
+  viewimg:state.user.view_popup
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Document);

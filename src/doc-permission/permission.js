@@ -6,6 +6,8 @@ import {Modal} from 'react-bootstrap';
 //import { Button} from 'react-bootstrap';
 
 import {connect} from 'react-redux';
+import {setperpopup} from '../redux/user/user-actions';
+
 class Permission extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class Permission extends React.Component {
       data:this.props.data[3],
       docid:'',
       user_id:this.props.user_id,
-      show:true
+      show:this.props.per_popup
     };
 
   }
@@ -33,17 +35,15 @@ class Permission extends React.Component {
     this.setState({[event.target.name]:event.target.value});
   }
 
-  HandleClose = () => this.setState({show:false});
-
   render () {
 
+    console.log(this.state.show);
     return (
 
       <React.Fragment>
 
-        <Modal show={this.state.show} onHide={this.HandleClose}>
+        <Modal show={this.state.show} onHide={() => this.props.dispatch(setperpopup())}>
           <Modal.Header closeButton>
-
           </Modal.Header>
           <Modal.Body>
 
@@ -52,7 +52,6 @@ class Permission extends React.Component {
             text="Doctor id"
             value={this.state.docid}
             placeholder='Enter doctor id'
-            name="docid"
             handlechange={this.handlechange}
             required
             />
@@ -80,6 +79,8 @@ class Permission extends React.Component {
 
 
 const mapStateToProps = state => ({
-  user_id:state.user.user_id
+  user_id:state.user.user_id,
+  per_popup:state.user.per_popup
 });
+
 export default connect(mapStateToProps)(Permission);

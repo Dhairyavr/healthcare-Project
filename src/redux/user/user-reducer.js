@@ -1,6 +1,7 @@
 const inital_state={
   user_id:'',
-  mail_id:''
+  per_popup:false,
+  view_popup:false
 }
 
 const userReducer = (state=inital_state,action) => {
@@ -12,11 +13,18 @@ const userReducer = (state=inital_state,action) => {
       user_id:action.payload
     };
 
-    case 'SET_MAIL':
+    case 'SET_PERMISSION_POPUP':
     return {
       ...state,
-      mail_id:action.payload
+      per_popup:!state.per_popup
     }
+
+    case 'SET_VIEW_POPUP':
+    return {
+      ...state,
+      view_popup:!state.view_popup
+    }
+
     default:
     return state;
 
